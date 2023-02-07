@@ -8,7 +8,10 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body>{children}</body>
+
+      <div className="flex">
+          <body className="bg-[#343541] flex-1">{children}</body>
+      </div>
     </html>
   )
 }
