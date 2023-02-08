@@ -1,5 +1,5 @@
-import {SunIcon} from "@heroicons/react/24/solid";
-import {BoltIcon, ExclamationTriangleIcon} from "@heroicons/react/20/solid";
+import { SunIcon } from "@heroicons/react/24/solid";
+import { BoltIcon, ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 
 function HomePage(props) {
     return (
