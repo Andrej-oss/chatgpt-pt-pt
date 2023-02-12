@@ -1,7 +1,7 @@
 import { SunIcon } from "@heroicons/react/24/solid";
 import { BoltIcon, ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 
-function HomePage(props) {
+function HomePage() {
     return (
         <div className="flex flex-col text-white justify-center h-screen items-center px-2">
             <h1 className="text-5xl font-bold mb-40">ChatGPTPTPT</h1>
