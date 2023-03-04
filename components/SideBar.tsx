@@ -7,7 +7,7 @@ import {useCollection} from "react-firebase-hooks/firestore";
 import {collection, orderBy, query} from "@firebase/firestore";
 import {db} from "../firebase";
 
-function SideBar(props) {
+function SideBar() {
     const AUTHENTICATED = "authenticated";
     const {  status, data: session  } = useSession();
     const [ chats, loading, error ] = useCollection(

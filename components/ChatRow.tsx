@@ -36,7 +36,7 @@ function ChatRow({ id }: Props) {
         <div onClick={() => router.push(`/chat/${id}`)} className={`chat-row justify-center ${active && 'bg-gray-700/50'}`}>
             <ChatBubbleLeftIcon className="h-5 w-5"/>
             <p className="flex-1 hidden md:inline-flex truncare">
-                {messages?.docs[messages?.docs.length - 1]?.data()?.toString() || "New Chat"}
+                {messages?.docs[messages?.docs.length - 2]?.data()?.text.toString() || "New Chat"}
             </p>
             <TrashIcon className="h-5 w-5 text-gray-700 hover:text-red-500" onClick={deleteChat}/>
         </div>
