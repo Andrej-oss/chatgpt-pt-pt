@@ -6,3 +6,5 @@ export { default as ChatRow } from "./ChatRow";
 export { default as ChatScreen } from "./ChatScreen";
 export { default as ChatInput } from "./ChatInput";
 export { default as ClientProvider } from "./ClientProvider";
+export { default as Message } from "./Message";
+export { default as ModelSelection } from "./ModelSelection";

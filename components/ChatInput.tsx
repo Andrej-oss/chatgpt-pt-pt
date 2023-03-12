@@ -8,12 +8,15 @@ import {addDoc, collection, serverTimestamp} from "@firebase/firestore";
 import {db} from "../firebase";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {ModelSelection} from "./index";
+import useSWR from "swr";
 
 function ChatInput({id}: Props) {
     const {data: session} = useSession();
     const [prompt, setPrompt] = useState("");
 
-    const model = "text-davinci-003";
+    // const model = "text-davinci-003";
+    const {data: model} = useSWR("model", {fallbackData: "text-davinci-003"});
     const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
@@ -83,8 +86,8 @@ function ChatInput({id}: Props) {
                     <PaperAirplaneIcon className="h-4 w-4 -rotate-45 text-white"/>
                 </button>
             </form>
-            <div>
-                {/*    model selection*/}
+            <div className="sm:hidden m-1">
+                <ModelSelection />
             </div>
         </div>
     );

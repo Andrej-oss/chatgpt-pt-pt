@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import {ChatRow, NewChat} from "./index";
+import {ChatRow, ModelSelection, NewChat} from "./index";
 import {useSession, signOut} from "next-auth/react";
 import {UserIcon} from "@heroicons/react/20/solid";
 import {useCollection} from "react-firebase-hooks/firestore";
@@ -19,7 +19,19 @@ function SideBar() {
             <div className="flex-1">
                 <div>
                     <NewChat/>
-                    <div>
+                    <div className="hidden sm:inline">
+                        <ModelSelection />
+                    </div>
+                    {
+                        loading && (
+                            <div className="animate-pulse text-white text-center">
+                                <p>
+                                    Chats are loading...
+                                </p>
+                            </div>
+                        )
+                    }
+                    <div className="flex flex-col space-y-2">
                         { status === AUTHENTICATED && chats?.docs
                             && chats.docs.map(chat => <ChatRow key={chat.id} id={chat.id}/>)}
                     </div>
