@@ -6,7 +6,7 @@ import {useSession} from "next-auth/react";
 import {addDoc, serverTimestamp, collection} from "@firebase/firestore";
 import {db} from "../firebase";
 
-const NewChat = (props) => {
+const NewChat = () => {
     const router = useRouter();
     const { data: session } = useSession();
     const createNewChat = async () => {

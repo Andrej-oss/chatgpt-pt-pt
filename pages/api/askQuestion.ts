@@ -2,7 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import queryApi from "../../lib/queryApi";
 import {Message} from "../../model/models";
-import {serverTimestamp} from "@firebase/firestore";
+import admin from "firebase-admin";
+import {adminDb} from "../../firebaseAdmin";
 
 type Data = {
     answer: string
@@ -28,13 +29,17 @@ export default async function handler(
 
     const message: Message = {
         text: response || "ChatGPT was not available to find an answer for that",
-        createdAt: serverTimestamp(),
+        createdAt: admin.firestore.Timestamp.now(),
         user: {
-            _id: session.user.email,
-            name: session.user.name,
-            avatar: session.user.avatar
+            _id: "ChatGPT" + model,
+            name: "ChatGPT",
+            avatar: "https://links.papareact.com/89k"
         }
-    }
+    };
 
-    res.status(200).json({answer: JSON.stringify(message)})
+    await adminDb.collection("users").doc(session.user.email)
+        .collection("chats").doc(id)
+        .collection("messages").add(message);
+
+    res.status(200).json({answer: message.text})
 }

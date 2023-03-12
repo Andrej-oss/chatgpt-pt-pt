@@ -34,12 +34,23 @@ function ChatInput({id}: Props) {
           }
       }
 
-      await addDoc(collection(db, "users", session?.user?.email!, "chats", id, "messages"),
-          message)
+        try {
+            await addDoc(collection(db, "users", session?.user?.email as string, "chats", id, "messages"), message)
+                .catch(err => {
+                    toast.error(`Something goes wrong with ${err.message}`, {
+                        id: notification
+                    })
+                });
+      }
+      catch (err: any) {
+          toast.error(`Something goes wrong with ${err.message}`, {
+              id: notification
+          })
+      }
 
-        await axios.post("/api/askQuestion", JSON.stringify({
+       await axios.post("/api/askQuestion", {
             prompt: input, id, model, session
-        }))
+        })
             .then(() => {
                 toast.success("ChatGPT has responded", {
                     id: notification
@@ -53,7 +64,7 @@ function ChatInput({id}: Props) {
     }
 
     return (
-        <div className=" bg-gray-700/50 text-gray-400 text-sm rounded-md">
+        <div className=" bg-gray-700/50 text-gray-300 text-sm rounded-md">
             <form onSubmit={sendMessage}
                 className="flex p-5 space-x-5 flex-1">
                 <input
@@ -69,7 +80,7 @@ function ChatInput({id}: Props) {
                     className="hover:opacity-50 py-2 px-4 bg-[#11A37F] font-bold rounded
                      disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-100"
                     type={"submit"}>
-                    <PaperAirplaneIcon className="h-4 w-4 -rotate-45"/>
+                    <PaperAirplaneIcon className="h-4 w-4 -rotate-45 text-white"/>
                 </button>
             </form>
             <div>

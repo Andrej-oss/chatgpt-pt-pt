@@ -9,7 +9,7 @@ import {db} from "../firebase";
 
 function SideBar() {
     const AUTHENTICATED = "authenticated";
-    const {  status, data: session  } = useSession();
+    const { status, data: session } = useSession();
     const [ chats, loading, error ] = useCollection(
         session && query(collection(db, "users", session?.user?.email as string, "chats"), orderBy("createdAt", "asc"))
     );
